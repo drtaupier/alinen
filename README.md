@@ -1,6 +1,8 @@
-# Webpack Starter
+# ALINEN
 
-Este es el proyecto inicial para desplegar aplicaciones utilizando Webpack.
+Este es un proyecto para la actualización del sistema de control de voluntarias del Alinen.
+Las tecnologías a utilizar son HTML, SCSS, JAVASCRIPT, NODE.JS, WEBPACK y como Base de Datos utilizamos MongoDB.
+ 
 
 ### Notas:
 Recuerden reconstruir los modulos de node:
