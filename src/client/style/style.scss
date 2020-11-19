@@ -1,0 +1,97 @@
+$header: linear-gradient(90deg, rgba(51,96,177,1) 0%, rgba(34,78,134,1) 27%, rgba(60,91,144,1) 70%, rgba(50,74,144,1) 86%, rgba(32,82,150,1) 100%);
+$website-bg: #f3f3f3;
+$font-page: 'Open Sans', sans-serif;
+$font-claro: #f3f3f3;
+$footer: #013A63;
+$boton: #355070;
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    width: 100vw;
+    height: 100vh;
+    font-size: 16px;
+}
+
+body{
+    background: $website-bg;
+    font-family: $font-page;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: "header header header header"
+                "section section section section"
+                "footer footer footer footer";
+}
+
+header{
+    grid-area: header;
+    height: 10vh;
+    background: $header;
+    #logo{
+        height: 100%;
+        width: 10%;
+        margin-left: 160px;
+        img{
+            height: 100%;
+        }
+    }
+}
+
+section{
+    grid-area: section;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #formulario{
+        width: 45%;
+        height: 60%;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        form{
+            width: 60%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            input, select{
+                border-radius: 5px;
+                padding: 15px;
+                border: none;
+                outline: none;
+                margin-bottom: 5px;
+            }
+            input[type="submit"]{
+                margin-top: 8px;
+                color: $font-claro;
+                background: $boton;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+footer{
+    grid-area: footer;
+    height: 10vh;
+    background: #013A63;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h3{
+        color: $font-claro;
+        font-weight: normal;
+        font-size: 1em;
+    }
+}
