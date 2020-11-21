@@ -1,14 +1,15 @@
-import { UI } from './classes'
-const ui = new UI();    
+import { UI, Formularios } from './classes'
+const ui = new UI();
+const formulario = new Formularios();   
 
 window.onload = function(){
     ui.footer();
 
-    const formulario = document.querySelector('form');
-    formulario.addEventListener('submit', e => {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
         e.preventDefault();
-        ui.deleteMsg();
-        validaForm(); 
+        formulario.deleteMsg();
+        validaForm();
     });
 
     function validaForm(){
@@ -17,19 +18,19 @@ window.onload = function(){
         const day = document.querySelector('select').value;
 
         if(user === '' && psw === ''){
-            ui.msgError("Por favor, ingrese sus credenciales");
+            formulario.msgError("Por favor, ingrese sus credenciales");
         }else if(user === ''){
-            ui.msgError("Por favor, ingrese el usuario");
+            formulario.msgError("Por favor, ingrese el usuario");
             return false;
         }else if(psw === ''){
-            ui.msgError('Por favor, ingrese su contraseña');
+            formulario.msgError('Por favor, ingrese su contraseña');
             return false;
         }else if(day == 0){
-            ui.msgError("Por favor, seleccione el día que le corresponde");
+            formulario.msgError("Por favor, seleccione el día que le corresponde");
             return false;
         }else{
             console.log('I did login');
-            postData('/mylogin', {'user': user, 'psw': psw, 'day': day, 'fecha': fecha });
+            postData('/mylogin', {'user': user, 'psw': psw, 'day': day });
         }
     }
 }

@@ -3,7 +3,21 @@ export class UI{
         const footer = document.querySelector('footer');
         const today = new Date();
         const year = today.getFullYear();
-        footer.innerHTML = `<h3>Copyright &copy ${year}</h3>`;
+        footer.innerHTML = `<h3>Derechos Reservados &copy ${year}</h3>`;
+    }
+
+    fechaActual(){
+        const today = new Date();
+        const hour = today.getUTCHours();
+        const minutes = today.getMinutes();
+        const seconds = today.getUTCSeconds()        
+    }
+}
+
+export class Formularios{
+    cleanForm(){
+        const form = document.querySelector('form');
+        form.reset();
     }
 
     msgError(mensaje){
@@ -24,17 +38,5 @@ export class UI{
                 mensaje.remove();
             }
         })
-    }
-
-    cleanForm(){
-        const form = document.querySelector('form');
-        form.reset();
-    }
-
-    fechaActual(){
-        const today = new Date();
-        const hour = today.getUTCHours();
-        const minutes = today.getMinutes();
-        const seconds = today.getUTCSeconds()        
     }
 }
