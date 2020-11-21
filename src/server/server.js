@@ -13,19 +13,23 @@ app.use(cors());
 
 app.use(express.static('dist'));
 app.use(express.static('public'));
+//Express HBS engine
+//app.set('view engine', 'hbs');
+//Creamos rutas para mostrar archivos:
+// app.get('/', (req, res) => {
+//     res.render('home',{
+//         nombre: 'David',
+//         anio: new Date().getFullYear()
+//     });
+// })
 
-app.get('/viewData', (req, res) => {
-    res.send(projectData);
-})
-
-app.post('/myContacts', (req, res) => {
+app.post('/mylogin', (req, res) => {
     const body = req.body;
     let data = {
-        name: body.name,
-        lastName: body.lastName,
-        phone: body.phone,
-        email: body.email,
-        message: body.message
+        user: body.user,
+        psw: body.psw,
+        day: body.day,
+        fecha: body.fecha
     }
     projectData.push(data);
     res.send('Información enviada con éxito');
