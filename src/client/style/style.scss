@@ -90,9 +90,11 @@ section{
         justify-content: center;
         align-items: center;
         background: rgb(104, 8, 8);
-        color: #fff;
-        font-weight: normal;
-        font-size: 0.5em;
+        h2{
+            color: #fff;
+            font-weight: normal;
+            font-size: 0.8em;
+        }
     }
 }
 
