@@ -52,6 +52,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     #formulario{
         width: 45%;
         height: 60%;
@@ -82,6 +83,17 @@ section{
             }
         }
     }
+    #errorMsg{
+        width: 45%;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgb(104, 8, 8);
+        color: #fff;
+        font-weight: normal;
+        font-size: 0.5em;
+    }
 }
 
 footer{
@@ -101,10 +113,15 @@ footer{
 /* Responsive */
 
 @media (max-width: 1500px){
-    section #formulario{
-        width: 55%;
-        form{
-            width: 70%;
+    section{
+        #formulario{
+            width: 55%;
+            form{
+                width: 70%;
+            }
+        } 
+        #errorMsg{
+            width: 55%;
         }
     }
 }
@@ -123,6 +140,9 @@ footer{
             form{
                 width: 70%;
             }
+        }
+        #errorMsg{
+            width: 80%;
         }
     }
 }
@@ -152,6 +172,9 @@ footer{
             form{
                 width: 80%;
             }
+        }
+        #errorMsg{
+            width: 90%;
         }
     }
 }
@@ -184,6 +207,9 @@ footer{
                     margin-top: 12px;
                 }
             }
+        }
+        #errorMsg{
+            width: 99%;
         }
     }
 
