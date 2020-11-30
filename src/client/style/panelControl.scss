@@ -1,0 +1,47 @@
+$header: linear-gradient(90deg, rgba(51,96,177,1) 0%, rgba(34,78,134,1) 27%, rgba(60,91,144,1) 70%, rgba(50,74,144,1) 86%, rgba(32,82,150,1) 100%);
+$website-bg: #f3f3f3;
+$bg-white:#fff;
+$font-page: 'Open Sans', sans-serif;
+$font-claro: #f3f3f3;
+$footer: #013A63;
+$boton: #355070;
+$errorMsg:#B82E29;
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    width: 100vw;
+    height: 100vh;
+    font-size: 16px;
+}
+
+body{
+    background: $website-bg;
+    font-family: $font-page;
+    min-width: 320px;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: "header header header header"
+                "section section section section"
+                "footer footer footer footer";
+}
+
+header{
+    grid-area: header;
+}
+
+section{
+    grid-area: section;
+}
+
+footer{
+    grid-area: footer;
+}

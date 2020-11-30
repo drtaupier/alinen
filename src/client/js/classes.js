@@ -5,13 +5,6 @@ export class UI{
         const year = today.getFullYear();
         footer.innerHTML = `<h3>Derechos Reservados &copy ${year}</h3>`;
     }
-
-    fechaActual(){
-        const today = new Date();
-        const hour = today.getUTCHours();
-        const minutes = today.getMinutes();
-        const seconds = today.getUTCSeconds()        
-    }
 }
 
 export class Formularios{
@@ -39,4 +32,20 @@ export class Formularios{
             }
         })
     }
+
+    fechaActual(){
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        const hour = today.getHours();
+        const minutes = today.getMinutes();
+        const seconds = today.getSeconds();
+        const now = `${day}/${month}/${year} - ${hour}:${minutes}:${seconds}`;
+        return now;
+    }
+}
+
+class Usuarios{
+
 }

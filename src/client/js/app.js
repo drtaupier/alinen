@@ -1,8 +1,8 @@
 import { UI, Formularios } from './classes'
 const ui = new UI();
-const formulario = new Formularios();   
+const formulario = new Formularios();
 
-window.onload = function(){
+window.onload = function () {
     ui.footer();
 
     const form = document.querySelector('form');
@@ -12,30 +12,32 @@ window.onload = function(){
         validaForm();
     });
 
-    function validaForm(){
+    function validaForm() {
         const user = document.querySelector('#user').value.trim();
         const psw = document.querySelector('#psw').value.trim();
         const day = document.querySelector('select').value;
+        const fecha = formulario.fechaActual();
 
-        if(user === '' && psw === ''){
+        if (user === '' && psw === '') {
             formulario.msgError("Por favor, ingrese sus credenciales");
-        }else if(user === ''){
+        } else if (user === '') {
             formulario.msgError("Por favor, ingrese el usuario");
             return false;
-        }else if(psw === ''){
+        } else if (psw === '') {
             formulario.msgError('Por favor, ingrese su contraseña');
             return false;
-        }else if(day == 0){
+        } else if (day == 0) {
             formulario.msgError("Por favor, seleccione el día que le corresponde");
             return false;
-        }else{
+        } else {
             console.log('I did login');
-            postData('/mylogin', {'user': user, 'psw': psw, 'day': day });
+            console.table({user, psw, day, fecha});
+            postData('/mylogin', { 'user': user, 'psw': psw, 'day': day, 'fecha': fecha });
         }
     }
 }
 
-const postData = async(url = '', data = {}) => {
+const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
         method: 'POST', //*GET, POST, PUT, DELETE, etc.
         credentials: 'same-origin',

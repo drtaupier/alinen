@@ -6,13 +6,11 @@
     <title>ALINEN</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../src/client/style/style.scss">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div id="container">
-        <header>
-            <div id="logo"><img src="img/logo.jpg" alt="alinen">{{ nombre }}</div>
-        </header>
+        {{> header}}
         <section>
             <div id="formulario">
                 <h2>Inicio de Sesión</h2>
@@ -35,7 +33,7 @@
                 </form>
             </div>
         </section>
-        <footer>Derechos Reservados &copy - {{ anio }}</footer>
+        {{> footer}}
     </div>
-<script src="main.js"></script></body>
+<script src="js/home.js"></script></body>
 </html>

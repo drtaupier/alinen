@@ -1,9 +1,11 @@
 $header: linear-gradient(90deg, rgba(51,96,177,1) 0%, rgba(34,78,134,1) 27%, rgba(60,91,144,1) 70%, rgba(50,74,144,1) 86%, rgba(32,82,150,1) 100%);
 $website-bg: #f3f3f3;
+$bg-white:#fff;
 $font-page: 'Open Sans', sans-serif;
 $font-claro: #f3f3f3;
 $footer: #013A63;
 $boton: #355070;
+$errorMsg:#B82E29;
 
 *{
     padding: 0;
@@ -74,6 +76,7 @@ section{
                 outline: none;
                 margin-bottom: 5px;
                 width: 100%;
+                background: $bg-white;
             }
             input[type="submit"]{
                 margin-top: 8px;
@@ -89,7 +92,7 @@ section{
         display: flex;
         justify-content: center;
         align-items: center;
-        background: rgb(104, 8, 8);
+        background: $errorMsg;
         h2{
             color: #fff;
             font-weight: normal;
