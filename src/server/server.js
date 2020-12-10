@@ -29,55 +29,7 @@ app.use(express.static('public'));
 //    });
 // });
 
-//GET
-app.get('/panelControl', (req, res) => {
-    res.render('dist/panelControl.html');
-})
-
-app.get('/usuario', (req, res)=>{
-    res.json('get Usuario');
-})
-
-//POST
-app.post('/mylogin', (req, res) => {
-    const body = req.body;
-    let data = {
-        user: body.user,
-        psw: body.psw,
-        day: body.day,
-        fecha: body.fecha,
-    }
-    projectData.push(data);
-    res.send('Información enviada con éxito');
-    console.log(projectData);
-})
-
-app.post('/usuario', (req, res)=>{
-    const body = req.body;
-    if(body.nombre === undefined){
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    }else{
-        res.json({
-            persona: body
-        });
-    }
-})
-
-//PUT
-app.put('/usuario/:id', (req, res)=>{
-    let id = req.params.id
-    res.json({
-        id
-    });
-})
-
-//DELETE
-app.delete('/usuario', (req, res)=>{
-    res.json('delete Ususario');
-})
+app.use(require('./routes/usuario'));
 
 mongoose.connect('mongodb://localhost:27017/alinen', (err, res)=>{
     if(err) throw err;
@@ -85,7 +37,6 @@ mongoose.connect('mongodb://localhost:27017/alinen', (err, res)=>{
 });
 
 //SERVER
-
 app.listen(process.env.PORT, ()=>{
     console.log('Escuchando puerto: ', process.env.PORT);
 });
