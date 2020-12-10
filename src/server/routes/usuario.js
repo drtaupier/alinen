@@ -16,20 +16,25 @@ app.get('/usuario', (req, res) => {
     desde = Number(desde);
     limite = Number(limite);
     Usuario.find({})
-    .skip(desde)
-    .limit(limite)
-    .exec((err, usuarios) => {
-        if(err) {
-            res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-        res.json({
-            ok: true,
-            usuarios //nombre de la colección
+        .skip(desde)
+        .limit(limite)
+        .exec((err, usuarios) => {
+            if (err) {
+                res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            Usuario.count({}, (err, conteo) => {
+                res.json({
+                    ok: true,
+                    usuarios,
+                    total: conteo
+                })
+            })
+
         })
-    })
 })
 
 //POST
