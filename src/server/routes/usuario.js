@@ -4,18 +4,20 @@ const app = express();
 const Usuario = require('../models/usuario');
 const _ = require('underscore');
 const usuario = require('../models/usuario');
+const { json } = require('body-parser');
+const { verificaToken } = require('../middlewares/authentication');
 
 //GET (obtener)
 app.get('/panelControl', (req, res) => {
     res.render('dist/panelControl.html');
 })
-
-app.get('/usuario', (req, res) => {
+//Esta consulta trae unicamente usuarios activos
+app.get('/usuario', verificaToken, (req, res) => {
     let desde = req.query.desde || 0;
     let limite = req.query.limite || 5;
     desde = Number(desde);
     limite = Number(limite);
-    Usuario.find({})
+    Usuario.find({ estado: true }, 'nombre apellido estado') //El segundo argumento es para decirle que campos quiero que me muestre al momento de hacer la consulta
         .skip(desde)
         .limit(limite)
         .exec((err, usuarios) => {
@@ -26,7 +28,7 @@ app.get('/usuario', (req, res) => {
                 });
             }
 
-            Usuario.count({}, (err, conteo) => {
+            Usuario.count({ estado: true }, (err, conteo) => {
                 res.json({
                     ok: true,
                     usuarios,
@@ -93,8 +95,59 @@ app.put('/usuario/:email', (req, res) => {
 })
 
 //DELETE (eliminar)
-app.delete('/usuario', (req, res) => {
-    res.json('delete Ususario');
-});
+// app.delete('/usuario/:id', (req, res) => {
+//     let id = req.params.id;
+//     Usuario.findByIdAndDelete(id, (err, usuarioEliminado) => {
+//         if (err) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 err
+//             });
+//         };
+
+//         if (!usuarioEliminado) {
+//             return res.status(400).json({
+//                 ok: false,
+//                 error: {
+//                     message: 'Usuario no encontrado'
+//                 }
+//             });
+//         }
+
+//         res.json({
+//             ok: true,
+//             usuario: usuarioEliminado
+//         })
+//     })
+// });
+
+app.delete('/usuario/:id', (req, res) => {
+    let id = req.params.id;
+    let cambioEstado = {
+        estado: false
+    }
+    Usuario.findByIdAndUpdate(id, cambioEstado, { new: true }, (err, usuarioEliminado) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+        if (!usuarioEliminado) {
+            return res.status(400).json({
+                ok: false,
+                error: {
+                    message: 'Usuario no encontrado'
+                }
+            });
+        }
+
+        res.json({
+            ok: true,
+            usuario: usuarioEliminado
+        })
+
+    })
+})
 
 module.exports = app;

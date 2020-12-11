@@ -29,7 +29,8 @@ app.use(express.static('public'));
 //    });
 // });
 
-app.use(require('./routes/usuario'));
+//Configuración global de rutas
+app.use(require('./routes/index'))
 
 mongoose.connect('mongodb://localhost:27017/alinen', (err, res)=>{
     if(err) throw err;
