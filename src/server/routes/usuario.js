@@ -5,7 +5,7 @@ const Usuario = require('../models/usuario');
 const _ = require('underscore');
 const usuario = require('../models/usuario');
 const { json } = require('body-parser');
-const { verificaToken } = require('../middlewares/authentication');
+const { verificaToken, verificaAdminRole } = require('../middlewares/authentication');
 
 //GET (obtener)
 app.get('/panelControl', (req, res) => {
@@ -40,7 +40,7 @@ app.get('/usuario', verificaToken, (req, res) => {
 })
 
 //POST
-app.post('/mylogin', (req, res) => {
+app.post('/mylogin', [verificaToken, verificaAdminRole], (req, res) => {
     const body = req.body;
     let data = {
         user: body.user,
@@ -53,7 +53,7 @@ app.post('/mylogin', (req, res) => {
     console.log(projectData);
 })
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
     const body = req.body;
     //instanciando el Schema
     let usuario = new Usuario({
@@ -79,19 +79,20 @@ app.post('/usuario', (req, res) => {
 
 
 //PUT (actualizar)
-app.put('/usuario/:email', (req, res) => {
-    let email = req.params.email;
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
+    let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'apellido', 'estado']); //Como segundo argumento, recibe todos los campos que si se podrán actualizar. Hacemos que el psw no pueda ser actualizado de esta manera
-    Usuario.findByIdAndUpdate(email, body, { new: true, runValidators: true }, (err, usuarioDB));
-    if (err) {
-        return res.status(400).json({
-            ok: false,
-            err
+    Usuario.findByIdAndUpdate(id, body, { new: true, runValidators: true }, (err, usuarioDB) => {
+        if (err) {
+            return res.status(400).json({
+                ok: false,
+                err
+            });
+        }
+        res.json({
+            usuarioDB
         });
-    }
-    res.json({
-        id
-    });
+    })
 })
 
 //DELETE (eliminar)
@@ -121,7 +122,7 @@ app.put('/usuario/:email', (req, res) => {
 //     })
 // });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], (req, res) => {
     let id = req.params.id;
     let cambioEstado = {
         estado: false

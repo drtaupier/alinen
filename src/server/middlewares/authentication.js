@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+//=========Verifica Token============
+
 let verificaToken = (req, res, next) => {
     let token = req.get('Authorization');
 
@@ -7,7 +9,9 @@ let verificaToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err
+                err: {
+                    message: 'Token no válido'
+                }
             })
         }
 
@@ -16,7 +20,23 @@ let verificaToken = (req, res, next) => {
     });
 }
 
+//=========Verifica AdminRole============
+
+let verificaAdminRole = (req, res, next) => {
+    let usuario = req.usuario;
+    if(usuario.role === 'ADMIN_ROLE'){
+        next();
+    }else{
+        res.json({
+            ok:false,
+            err:{
+                message: 'El usuario no es Administrador'
+            }
+        });
+    }
+};
 
 module.exports = {
-    verificaToken
+    verificaToken,
+    verificaAdminRole
 }
