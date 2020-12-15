@@ -11,6 +11,8 @@ app.get('/voluntarias', verificaToken, (req, res) => {
     desde = Number(desde);
     limite = Number(limite);
     Voluntaria.find({estado: true})
+    .sort('apellido')
+    .populate('usuario', 'nombre apellido')
     .skip(desde)
     .limit(limite)
     .exec((err, voluntarias)=>{
