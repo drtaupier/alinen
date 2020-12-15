@@ -31,7 +31,7 @@ window.onload = function () {
             return false;
         } else {
             console.log('I did login');
-            console.table({email, password, day, fecha});
+            console.table({ email, password, day, fecha });
             postData('/mylogin', { 'email': email, 'password': password, 'day': day, 'fecha': fecha });
         }
     }

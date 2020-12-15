@@ -1,16 +1,11 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const app = express();
-const Usuario = require('../models/usuario');
+const Usuario = require('../models/usuarioSchema');
 const _ = require('underscore');
-const usuario = require('../models/usuario');
 const { json } = require('body-parser');
 const { verificaToken, verificaAdminRole } = require('../middlewares/authentication');
 
-//GET (obtener)
-app.get('/panelControl', (req, res) => {
-    res.render('dist/panelControl.html');
-})
 //Esta consulta trae unicamente usuarios activos
 app.get('/usuario', verificaToken, (req, res) => {
     let desde = req.query.desde || 0;
@@ -47,7 +42,7 @@ app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
         nombre: body.nombre,
         apellido: body.apellido,
         email: body.email,
-        password: bcrypt.hashSync(body.password, 10),
+        password: bcrypt.hashSync(body.password, 10)
     });
     //guardando la información en la BD:
     usuario.save((err, usuarioDB) => {
