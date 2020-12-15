@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
 const app = express();
 
-app.post('/login', (req, res) => {
+app.post('/mylogin', (req, res) => {
     let body = req.body;
 
     Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
@@ -36,7 +36,7 @@ app.post('/login', (req, res) => {
         let token = jwt.sign({
             usuario: usuarioDB
         }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN }) //asi expirara en 30 dias
-
+        
         res.json({
             ok: true,
             usuario: usuarioDB,

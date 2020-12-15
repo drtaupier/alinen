@@ -2,15 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
+    context: path.join(__dirname, 'src', 'client'),
     entry: {
-        index: './src/client/index.js',
+        index: './index/index.js',
+        panelControl: './panelControl/index.js'
     },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: '[name].bundle.js'
+        filename: 'js/[name].bundle.js'
     },
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
@@ -25,12 +28,24 @@ module.exports = {
             },
             {
                 test: '/\.html$/',
-                use: [{ loader: "html-loader" }],
+                use: [
+                    {
+                        loader: "html-loader",
+                        options:{
+                            name:'[name].[ext]'
+                        } 
+                    }
+                ],
+                exclude: path.resolve(__dirname, 'src/client/views/index.html')
             },
             {
-                test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
-            },
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'    
+                ]
+            },  
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [{
@@ -40,8 +55,19 @@ module.exports = {
         ]
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename:'css/[name]-styles.css'
+        }),
         new HtmlWebpackPlugin({
-            template: "./src/client/views/index.html",
+            filename: "index.html",
+            template: "./views/index.html",
+            chunks: ["index"]
+
+        }),
+        new HtmlWebpackPlugin({
+            filename: "panelControl.html",
+            template: "./views/panelControl.html",
+            chunks: ["panelControl"]
         }),
         new CleanWebpackPlugin({
             //Simulate the removal of files

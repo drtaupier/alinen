@@ -13,17 +13,17 @@ window.onload = function () {
     });
 
     function validaForm() {
-        const user = document.querySelector('#user').value.trim();
-        const psw = document.querySelector('#psw').value.trim();
+        const email = document.querySelector('#email').value.trim();
+        const password = document.querySelector('#psw').value.trim();
         const day = document.querySelector('select').value;
         const fecha = formulario.fechaActual();
 
-        if (user === '' && psw === '') {
+        if (email === '' && password === '') {
             formulario.msgError("Por favor, ingrese sus credenciales");
-        } else if (user === '') {
+        } else if (email === '') {
             formulario.msgError("Por favor, ingrese el usuario");
             return false;
-        } else if (psw === '') {
+        } else if (password === '') {
             formulario.msgError('Por favor, ingrese su contraseña');
             return false;
         } else if (day == 0) {
@@ -31,8 +31,8 @@ window.onload = function () {
             return false;
         } else {
             console.log('I did login');
-            console.table({user, psw, day, fecha});
-            postData('/mylogin', { 'user': user, 'psw': psw, 'day': day, 'fecha': fecha });
+            console.table({email, password, day, fecha});
+            postData('/mylogin', { 'email': email, 'password': password, 'day': day, 'fecha': fecha });
         }
     }
 }

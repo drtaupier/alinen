@@ -40,19 +40,6 @@ app.get('/usuario', verificaToken, (req, res) => {
 })
 
 //POST
-app.post('/mylogin', [verificaToken, verificaAdminRole], (req, res) => {
-    const body = req.body;
-    let data = {
-        user: body.user,
-        psw: body.psw,
-        day: body.day,
-        fecha: body.fecha,
-    }
-    projectData.push(data);
-    res.send('Información enviada con éxito');
-    console.log(projectData);
-})
-
 app.post('/usuario', [verificaToken, verificaAdminRole], (req, res) => {
     const body = req.body;
     //instanciando el Schema

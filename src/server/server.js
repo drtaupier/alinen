@@ -1,9 +1,10 @@
 require('./config/config');
-projectData = [];
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const hbs = require('hbs');
+const path = require('path');
+projectData = [];
 
 /*Dependencies*/
 const bodyParser = require('body-parser');
@@ -16,7 +17,7 @@ const cors = require('cors');
 app.use(cors());
 
 app.use(express.static('dist'));
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, '../../public')));
 
 //Express HBS engine
     //Definimos la ruta de nuestros partials (aquí se pondrán las plantillas de cada sección)
