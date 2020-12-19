@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 let Schema = mongoose.Schema;
 
 let diaSchema = new Schema({
-    dia: {
-        type: String,
-        required: [true, 'El día es requerido']
-    },
-    usuario: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario'
-    }
-})
+	dia: {
+		type: String,
+		required: [true, "El día es requerido"],
+	},
+	usuario: {
+		type: Schema.Types.ObjectId,
+		ref: "Usuario",
+	},
+});
 
-module.exports = mongoose.model('Dia', diaSchema);
+module.exports = mongoose.model("Dia", diaSchema);
