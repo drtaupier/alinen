@@ -16,8 +16,8 @@ let voluntariaSchema = new Schema({
         required: [true, 'El e-mail es requerido']
     },
     dia: {
-        type: String,
-        required: [true, 'El día es requerido']
+        type: Schema.Types.ObjectId,
+        ref: 'Dias'
     },
     estado: {
         type: Boolean,

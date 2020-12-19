@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const hbs = require('hbs');
 const path = require('path');
-projectData = [];
+const session = require('express-session');
 
 /*Dependencies*/
 const bodyParser = require('body-parser');
@@ -12,6 +12,11 @@ const bodyParser = require('body-parser');
 /*Middleware*/
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(session({
+    secret: "mysecretkey",
+    resave: false,
+    saveUninitialized: false
+}))
 //Cors
 const cors = require('cors');
 app.use(cors());

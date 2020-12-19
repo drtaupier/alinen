@@ -13,6 +13,7 @@ app.get('/usuario', verificaToken, (req, res) => {
     desde = Number(desde);
     limite = Number(limite);
     Usuario.find({ estado: true }, 'nombre apellido estado') //El segundo argumento es para decirle que campos quiero que me muestre al momento de hacer la consulta
+        .sort('apellido')
         .skip(desde)
         .limit(limite)
         .exec((err, usuarios) => {

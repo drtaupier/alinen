@@ -59,6 +59,25 @@ app.get('/voluntarias/:id', verificaToken, (req, res) =>{
     
 })
 
+//Buscar voluntaria:
+app.get('/voluntarias/buscar/:termino', verificaToken, (req, res)=>{
+    let termino = req.params.termino;
+    Voluntaria.find({nombre: termino})
+    .populate('dias', 'dia') //primero es el nombre de la colección 
+    .exec((err, voluntarias)=>{
+        if (err) {
+            res.status(500).json({
+                ok: false,
+                err
+            })
+        }
+        res.json({
+            ok: true,
+            voluntarias
+        })
+    })
+})
+
 app.post('/voluntarias', [verificaToken, verificaAdminRole], (req, res) => {
     let body = req.body;
 
@@ -137,7 +156,7 @@ app.delete('/voluntarias/:id', [verificaToken, verificaAdminRole], (req, res) =>
             return res.status(400).json({
                 ok: false,
                 err:{
-                    message:'ID no ubicado'
+                    message:'ID no existe'
                 }
             });
         }
