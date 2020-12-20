@@ -86,6 +86,7 @@ app.get("/voluntarias/buscar/:termino", verificaToken, (req, res) => {
 		});
 });
 
+//POST Route
 app.post("/voluntarias", [verificaToken, verificaAdminRole], (req, res) => {
 	let body = req.body;
 

@@ -24,6 +24,10 @@ let voluntariaSchema = new Schema({
 		type: Boolean,
 		default: true,
 	},
+	fecha_alta: {
+		type: Date,
+		default: () => Date.now(),
+	},
 	usuario: {
 		type: Schema.Types.ObjectId,
 		ref: "Usuario",
