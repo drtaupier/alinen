@@ -28,6 +28,10 @@ let voluntariaSchema = new Schema({
 		type: Date,
 		default: () => Date.now(),
 	},
+	img: {
+		type: String,
+		required: false,
+	},
 	usuario: {
 		type: Schema.Types.ObjectId,
 		ref: "Usuario",

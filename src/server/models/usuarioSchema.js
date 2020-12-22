@@ -34,6 +34,10 @@ let usuarioSchema = new Schema({
 		type: Date,
 		default: () => Date.now(),
 	},
+	img: {
+		type: String,
+		required: false,
+	},
 	estado: {
 		type: Boolean,
 		default: true,
