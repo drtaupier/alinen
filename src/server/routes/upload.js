@@ -93,6 +93,7 @@ function imagenUsuario(id, res, nombreArchivo) {
 		});
 	});
 }
+//Subir imagen voluntarias
 function imagenVoluntaria(id, res, nombreArchivo) {
 	Voluntaria.findById(id, (err, voluntariaDB) => {
 		if (err) {
@@ -111,7 +112,7 @@ function imagenVoluntaria(id, res, nombreArchivo) {
 				},
 			});
 		}
-		borraArchivo(voluntariaDB.img, "voluntaria");
+		borraArchivo(voluntariaDB.img, "voluntarias");
 		voluntariaDB.img = nombreArchivo;
 
 		voluntariaDB.save((err, voluntariaGuardada) => {
