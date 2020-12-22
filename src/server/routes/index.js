@@ -6,5 +6,6 @@ app.use(require("./login"));
 app.use(require("./voluntaria"));
 app.use(require("./dias"));
 app.use(require("./upload"));
+app.use(require("./imagenes"));
 
 module.exports = app;
